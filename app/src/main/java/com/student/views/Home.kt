@@ -51,14 +51,27 @@ import kotlinx.coroutines.launch
 fun Home() {
     var name by remember { mutableStateOf("") }
     var names = remember { mutableStateListOf<String>() }
+    var presents = remember { mutableStateListOf<String>() }
     val context = LocalContext.current
 
-    Column(modifier = Modifier.fillMaxSize().padding(16.dp).padding(WindowInsets.safeDrawing.asPaddingValues())) {
-        Text("Etec Albert Einstein", fontSize = 22.sp, fontWeight = FontWeight.SemiBold, color = Color(0xFF708090))
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+            .padding(WindowInsets.safeDrawing.asPaddingValues())
+    ) {
+        Text(
+            "Etec Albert Einstein",
+            fontSize = 22.sp,
+            fontWeight = FontWeight.SemiBold,
+            color = Color(0xFF708090)
+        )
         Spacer(modifier = Modifier.height(18.dp))
         Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
             OutlinedTextField(
-                modifier = Modifier.weight(1f).height(56.dp),
+                modifier = Modifier
+                    .weight(1f)
+                    .height(56.dp),
                 value = name,
                 onValueChange = { name = it },
                 label = { Text("Digite um nome") },
@@ -74,13 +87,26 @@ fun Home() {
             Button(
                 onClick = {
                     if (name.isNotBlank()) {
-                        names += name
-                        name = ""
+                        if (!names.contains(name)) {
+                            names += name
+                        } else {
+                            Toast.makeText(
+                                context,
+                                "Aluno já faz parte da lista.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
                     } else {
-                        Toast.makeText(context, "Digite um nome antes de adicionar!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            context,
+                            "Digite um nome antes de adicionar!",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 },
-                modifier = Modifier.height(56.dp).padding(top = 6.dp),
+                modifier = Modifier
+                    .height(56.dp)
+                    .padding(top = 6.dp),
                 shape = RoundedCornerShape(16.dp),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color(0xFF778899),
@@ -91,7 +117,7 @@ fun Home() {
             }
         }
         Spacer(modifier = Modifier.height(22.dp))
-        Text("Lista de nomes:", fontSize = 18.sp, fontWeight = FontWeight.Medium)
+        Text("Lista de alunos:", fontSize = 18.sp, fontWeight = FontWeight.Medium)
         names.forEach { namesItem ->
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -111,8 +137,67 @@ fun Home() {
                     color = Color(0xFF333333),
                     modifier = Modifier.weight(1f)
                 )
+
+                Button(
+                    onClick = {
+                        if (!presents.contains(name)) {
+                            presents += name
+                        } else {
+                            Toast.makeText(
+                                context,
+                                "Aluno já listado como presente.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    },
+                    modifier = Modifier
+                        .height(40.dp)
+                        .width(110.dp),
+                    shape = RoundedCornerShape(16.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFF778899),
+                        contentColor = Color.White
+                    )
+                ) {
+                    Text("Presente", fontWeight = FontWeight.SemiBold)
+                }
+
                 IconButton(
                     onClick = { names.remove(namesItem) }
+                ) {
+                    Icon(
+                        modifier = Modifier.width(18.dp),
+                        imageVector = Icons.Default.Close,
+                        contentDescription = null,
+                        tint = Color(0xFF333333)
+                    )
+                }
+            }
+        }
+        Spacer(modifier = Modifier.height(22.dp))
+        Text("Lista de presentes:", fontSize = 18.sp, fontWeight = FontWeight.Medium)
+        presents.forEach { presentsItem ->
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 4.dp)
+                    .background(
+                        color = Color(0xFFF0F4F8),
+                        shape = RoundedCornerShape(12.dp)
+                    )
+                    .padding(horizontal = 12.dp, vertical = 6.dp)
+            ) {
+                Text(
+                    "○ $presentsItem",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Medium,
+                    color = Color(0xFF333333),
+                    modifier = Modifier.weight(1f)
+                )
+
+                IconButton(
+                    onClick = { presents.remove(presentsItem) }
                 ) {
                     Icon(
                         modifier = Modifier.width(18.dp),
@@ -129,9 +214,11 @@ fun Home() {
 @Preview
 @Composable
 fun HomePreview() {
-    Box(Modifier
-        .fillMaxSize()
-        .background(Color.White)) {
+    Box(
+        Modifier
+            .fillMaxSize()
+            .background(Color.White)
+    ) {
         Home()
     }
 }
