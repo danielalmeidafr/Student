@@ -24,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
@@ -47,6 +48,8 @@ fun SignupPage(modifier: Modifier = Modifier, navController: NavController) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        Spacer(modifier = Modifier.height(28.dp))
+
         Text(text = "Página de Cadastro", fontSize = 32.sp, color = Color.White)
 
         Spacer(modifier = Modifier.height(28.dp))
@@ -56,40 +59,48 @@ fun SignupPage(modifier: Modifier = Modifier, navController: NavController) {
             onValueChange = {
                 email = it
             },
-            label = {
+            placeholder = {
                 Text(text = "Email:", color = Color.White.copy(0.5f), fontSize = 12.sp)
             },
+            textStyle = TextStyle(
+                fontSize = 12.sp,
+                color = Color.White.copy(0.8f)
+            ),
             modifier = Modifier
                 .fillMaxWidth(0.9f), shape = RoundedCornerShape(8.dp),
             colors = OutlinedTextFieldDefaults.colors(
                 unfocusedContainerColor = Color(0xFF181818),
                 unfocusedBorderColor = Color.White.copy(0.1F),
                 focusedContainerColor = Color(0xFF181818),
-                focusedBorderColor = Color.White.copy(0.1f)
+                focusedBorderColor = Color.White.copy(0.1f),
             )
         )
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(16.dp))
 
         OutlinedTextField(
             value = password,
             onValueChange = {
                 password = it
             },
-            label = {
+            placeholder = {
                 Text(text = "Senha:", color = Color.White.copy(0.5f), fontSize = 12.sp)
             },
+            textStyle = TextStyle(
+                fontSize = 12.sp,
+                color = Color.White.copy(0.8f)
+            ),
             modifier = Modifier
                 .fillMaxWidth(0.9f), shape = RoundedCornerShape(8.dp),
             colors = OutlinedTextFieldDefaults.colors(
                 unfocusedContainerColor = Color(0xFF181818),
                 unfocusedBorderColor = Color.White.copy(0.1F),
                 focusedContainerColor = Color(0xFF181818),
-                focusedBorderColor = Color.White.copy(0.1f)
+                focusedBorderColor = Color.White.copy(0.1f),
             )
         )
 
-        Spacer(modifier = Modifier.height(40.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 
         Button(
             onClick = {
