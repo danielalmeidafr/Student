@@ -14,7 +14,9 @@ import com.student.ui.presentation.login.LoginDestination
 import com.student.ui.presentation.login.loginScreen
 import com.student.ui.presentation.signup.SignupDestination
 import com.student.ui.presentation.signup.signupScreen
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
