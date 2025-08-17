@@ -1,4 +1,4 @@
-package com.student.pages
+package com.student.ui.presentation.home
 
 import android.widget.Toast
 import androidx.compose.foundation.background
@@ -40,9 +40,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import kotlinx.serialization.Serializable
 
 @Composable
-fun HomePage(modifier: Modifier = Modifier, navController: NavController) {
+fun HomeScreen(modifier: Modifier = Modifier) {
     var name by remember { mutableStateOf("") }
     var names = remember { mutableStateListOf<String>() }
     var presents = remember { mutableStateListOf<String>() }

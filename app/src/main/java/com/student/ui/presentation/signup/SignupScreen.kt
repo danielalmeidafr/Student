@@ -1,4 +1,4 @@
-package com.student.pages
+package com.student.ui.presentation.signup
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -29,10 +29,12 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 
 @Composable
-fun SignupPage(modifier: Modifier = Modifier, navController: NavController) {
+fun SignupScreen(
+    onNavigateToHome: () -> Unit,
+    onNavigateToLogin: () -> Unit
+) {
     var email by remember {
         mutableStateOf("")
     }
@@ -103,9 +105,7 @@ fun SignupPage(modifier: Modifier = Modifier, navController: NavController) {
         Spacer(modifier = Modifier.height(20.dp))
 
         Button(
-            onClick = {
-                navController.navigate("home")
-            },
+            onClick = onNavigateToHome,
             modifier = Modifier
                 .height(39.dp)
                 .width(260.dp),
@@ -119,9 +119,9 @@ fun SignupPage(modifier: Modifier = Modifier, navController: NavController) {
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        TextButton(onClick = {
-            navController.navigate("login")
-        }) {
+        TextButton(
+            onClick = onNavigateToLogin
+        ) {
             Text(
                 buildAnnotatedString {
                     append("Ja possui uma conta? ")

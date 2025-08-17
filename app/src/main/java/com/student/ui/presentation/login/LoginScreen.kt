@@ -1,4 +1,4 @@
-package com.student.pages
+package com.student.ui.presentation.login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -36,11 +36,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import com.student.R
 
 @Composable
-fun LoginPage(modifier: Modifier = Modifier, navController: NavController) {
+fun LoginScreen(
+    onNavigateToHome: () -> Unit,
+    onNavigateToSignup: () -> Unit
+) {
     var email by remember {
         mutableStateOf("")
     }
@@ -111,9 +113,7 @@ fun LoginPage(modifier: Modifier = Modifier, navController: NavController) {
         Spacer(modifier = Modifier.height(20.dp))
 
         Button(
-            onClick = {
-                navController.navigate("home")
-            },
+            onClick = onNavigateToHome,
             modifier = Modifier
                 .height(39.dp)
                 .width(260.dp),
@@ -161,9 +161,9 @@ fun LoginPage(modifier: Modifier = Modifier, navController: NavController) {
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        TextButton(onClick = {
-            navController.navigate("signup")
-        }) {
+        TextButton(
+            onClick = onNavigateToSignup
+        ) {
             Text(
                 buildAnnotatedString {
                     append("Não tem uma conta? ")
